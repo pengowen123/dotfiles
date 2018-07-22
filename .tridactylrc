@@ -1,0 +1,14 @@
+sanitise tridactyllocal tridactylsync
+fixamo_quiet
+
+" Settings
+guiset gui none
+set theme dark
+set searchengine duckduckgo
+set hintchars 4327895610
+set hintfiltermode vimperator-reflow
+set allowautofocus false
+
+" Binds
+bind K tabnext
+bind J tabprev
