@@ -2,7 +2,7 @@ sanitise tridactyllocal tridactylsync
 fixamo_quiet
 
 " Settings
-guiset gui none
+guiset_quiet gui none
 set theme dark
 set searchengine duckduckgo
 set hintchars 4327895610
