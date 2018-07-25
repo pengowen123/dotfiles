@@ -2,6 +2,7 @@ sanitise tridactyllocal tridactylsync
 fixamo_quiet
 
 " Settings
+set editorcmd alacritty -e nvim -c "call feedkeys('GA')"
 guiset_quiet gui none
 set theme dark
 set searchengine duckduckgo
