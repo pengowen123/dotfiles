@@ -62,6 +62,8 @@ map g/ <Plug>(incsearch-stay)
 map <Leader> <Plug>(easymotion-prefix)
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 nmap <Leader>t :!touch %<CR>
+ map <C-i> <C-i>zz
+nmap <C-o> <C-o>zz
 
 
 " Settings

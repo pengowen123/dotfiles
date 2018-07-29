@@ -12,8 +12,10 @@ alias vim = 'nvim'
 alias rgdb = 'rust-gdb'
 alias xcopy = 'xclip -sel clipboard'
 alias l = 'exa --long --group --header --color-scale'
+# FIXME
 #eval $(thefuck --alias fuck)
-alias fuck='eval $(env TF_ALIAS=fuck PYTHONIOENCODING=utf-8 thefuck !!)'
+# FIXME
+#alias rgvi="vi $(sk --ansi -i -c \'rg \"{}\"\' | sed -n -e \'s/\:.*//p\')"
 
 # Path
 export PATH = $PATH:$HOME/bin/
