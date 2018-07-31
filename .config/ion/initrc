@@ -12,6 +12,7 @@ alias vim = 'nvim'
 alias rgdb = 'rust-gdb'
 alias xcopy = 'xclip -sel clipboard'
 alias l = 'exa --long --group --header --color-scale'
+alias diffhead= 'git diff HEAD'
 # FIXME
 #eval $(thefuck --alias fuck)
 # FIXME
