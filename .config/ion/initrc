@@ -9,10 +9,11 @@
 # Aliases
 alias vi = 'nvim'
 alias vim = 'nvim'
+alias k = 'kak'
 alias rgdb = 'rust-gdb'
 alias xcopy = 'xclip -sel clipboard'
 alias l = 'exa --long --group --header --color-scale'
-alias diffhead= 'git diff HEAD'
+alias diffhead = 'git diff HEAD'
 # FIXME
 #eval $(thefuck --alias fuck)
 # FIXME
@@ -22,13 +23,10 @@ alias diffhead= 'git diff HEAD'
 export PATH = $PATH:$HOME/bin/
 export PATH = $PATH:"$HOME/.cargo/bin"
 export PATH = $PATH:"$HOME/clones/skim/target/release"
-export PATH = $PATH:"$HOME/clones/alacritty/target/release"
 export PATH = $PATH:"$HOME/clones/ion/target/release"
 
 # Environment variables
-export EDITOR = "nvim"
-export GHI_TOKEN = "78becc9cf82356440f2c2fa1be4c2683fb195efd"
+export EDITOR = "kak"
 export RUST_SRC_PATH = "$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
-export CARGO_INCREMENTAL = 1
 
 # vim: ft=ion
