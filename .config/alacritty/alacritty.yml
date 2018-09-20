@@ -40,6 +40,9 @@ font:
     x: 0
     y: 0
 
+  scale_with_dpi: true
+  use_thin_strokes: false
+
 # Colors (custom)
 colors:
   # Default colors
@@ -94,6 +97,12 @@ visual_bell:
   animation: EaseOutExpo
   duration: 0
 
+dynamic_title: true
+
+hide_cursor_when_typing: true
+cursor_style: Block
+unfocused_hollow_cursor: true
+
 # Key bindings
 #
 # Each binding is defined as an object with some properties. Most of the
@@ -125,12 +134,10 @@ visual_bell:
 key_bindings:
   - { key: Insert,  mods: Shift,    action: Paste                        }
   - { key: Insert,  mods: Control,  action: Copy                         }
-  - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
-  - { key: Home,                    chars: "\x1b[1~",  mode: AppCursor   }
-  - { key: End,                     chars: "\x1b[F",   mode: ~AppCursor  }
-  - { key: End,                     chars: "\x1b[4~",  mode: AppCursor   }
-  - { key: PageUp,                  chars: "\x1b[5~"                     }
-  - { key: PageDown,                chars: "\x1b[6~"                     }
+  - { key: PageUp,   mods: Shift,   action: ScrollPageUp                 }
+  - { key: PageDown, mods: Shift,   action: ScrollPageDown               }
+  - { key: End,      mods: Shift,   action: ScrollToBottom               }
+  - { key: Home,     mods: Shift,   action: ScrollToTop                  }
   - { key: Left,     mods: Shift,   chars: "\x1b[1;2D"                   }
   - { key: Left,     mods: Control, chars: "\x1b[1;5D"                   }
   - { key: Left,     mods: Alt,     chars: "\x1b[1;3D"                   }
@@ -184,6 +191,13 @@ key_bindings:
 # - Copy (TODO)
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
+
+
+scrolling:
+    history: 10000
+    multiplier: 3
+    faux_multiplier: 3,
+    auto_scroll: false,
 
 # Shell
 #
