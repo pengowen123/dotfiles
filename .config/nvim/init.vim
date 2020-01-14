@@ -8,7 +8,7 @@ au BufNewFile,BufRead *.glsl* set ft=glsl
 source $HOME/.config/nvim/plugin.vim
 
 " Set colorscheme
-colorscheme apprentice
+colorscheme Tomorrow-Night-Bright
 
 " Set tabline colors
 hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
