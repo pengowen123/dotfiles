@@ -1,14 +1,20 @@
 sanitise tridactyllocal tridactylsync
 fixamo_quiet
 
-" Settings
-set editorcmd alacritty -e nvim -c "call feedkeys('GA')"
+" GUI
 guiset_quiet gui none
+guiset_quiet hoverlink left
+guiset_quiet statuspanel left
+
+" Settings
+set newtab https://search.privacytools.io/searx/
+set editorcmd alacritty -e kak -e 'execute-keys gjA'
 set theme dark
 set searchengine duckduckgo
 set hintchars 4327895610
 set hintfiltermode vimperator-reflow
 set allowautofocus false
+set modeindicatorshowkeys true
 
 " Binds
 bind K tabnext
