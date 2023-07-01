@@ -7,10 +7,8 @@ guiset_quiet hoverlink left
 guiset_quiet statuspanel left
 
 " Settings
-set newtab https://search.privacytools.io/searx/
 set editorcmd alacritty -e kak -e 'execute-keys gjA'
 set theme dark
-set searchengine duckduckgo
 set hintchars 4327895610
 set hintfiltermode vimperator-reflow
 set allowautofocus false

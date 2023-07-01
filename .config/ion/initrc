@@ -1,32 +1,25 @@
 # .ionrc
 
-# Customize prompt
-# TODO: Customize prompt
-#fn PROMPT
-	#echo -n "${c::0x55,bold}${USER}${c::default}:${c::0x4B}${PWD}${c::default}#"
-#end
-
 # Aliases
-alias vi = 'nvim'
-alias vim = 'nvim'
+alias nv = 'nvim'
 alias k = 'kak'
 alias rgdb = 'rust-gdb'
 alias xcopy = 'xclip -sel clipboard'
 alias l = 'exa --long --group --header --color-scale'
-alias diffhead = 'git diff HEAD'
-# FIXME
-#eval $(thefuck --alias fuck)
-# FIXME
-#alias rgvi="vi $(sk --ansi -i -c \'rg \"{}\"\' | sed -n -e \'s/\:.*//p\')"
 
 # Path
 export PATH = $PATH:$HOME/bin/
 export PATH = $PATH:"$HOME/.cargo/bin"
-export PATH = $PATH:"$HOME/clones/skim/target/release"
 export PATH = $PATH:"$HOME/clones/ion/target/release"
+export PATH = $PATH:"$HOME/.ghcup/bin/"
+export PATH = $PATH:"$HOME/.local/bin/"
+export PATH = $PATH:"$HOME/.gem/ruby/2.7.0/bin"
+export PATH = $PATH:"/usr/lib/jvm/java-19-openjdk/bin/"
 
 # Environment variables
 export EDITOR = "kak"
 export RUST_SRC_PATH = "$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+#export FZF_FILE_COMMAND = "fd --type f --follow"
+export RUST_SRC_PATH=$(rustc +nightly --print sysroot)/lib/rustlib/src/rust/library
 
 # vim: ft=ion

@@ -113,31 +113,58 @@ color_callback = function(widget, stdout)
 end
 
 -- Create a textclock widget
-mytextclock = awful.widget.watch('bash -c "date +\'%F %T\'"', 5, color_callback)
+mytextclock = awful.widget.watch('bash -c "date +\'%F %T\'"', 1, color_callback)
 
 -- Custom right wibox widgets
 separator = wibox.widget.textbox(" | ")
 
-ip_callback = function(widget, stdout)
+ip_format_callback = function(widget, stdout)
     if stdout == "" then
         widget:set_markup("<span foreground='#FF0000'>down</span>")
-        print(widget.font)
     else
         widget:set_markup("<span foreground='#00FF00'>" .. stdout .. "</span>")
     end
 end
 
+ipv6_callback = function(widget, stdout)
+    stdout = stdout:gsub("%s", "")
+
+    if stdout == "" then
+        ip_format_callback(widget, stdout)
+    else
+        local command = 'bash -c "ip -6 addr show dev ' .. stdout .. ' | grep inet6 | sed -n \'s%.*inet6 \\(fe80[^ ]*\\) .*%\\1%p\'"'
+        awful.spawn.easy_async(command, function(stdout_ip, e)
+            ip_format_callback(widget, stdout_ip)
+        end)
+    end
+end
+
+ipv4_callback = function(widget, stdout)
+    stdout = stdout:gsub("%s", "")
+
+    if stdout == "" then
+        ip_format_callback(widget, stdout)
+    else
+        local command = 'bash -c "ip -4 addr show dev ' .. stdout .. ' | sed -n \'s|^.*inet \\([^ ]*/24\\).*$|\\1|p\'"'
+        awful.spawn.easy_async(command, function(stdout_ip, e)
+            ip_format_callback(widget, stdout_ip)
+        end)
+    end
+end
+
+active_network = 'enp10s0'
+
 -- IPv6 if available
-ipv6 = awful.widget.watch('bash -c "ip -6 addr show dev enp11s0 | sed -n \'/.*fe80/b; s|^.*inet6 \\([^ ]*/64\\).*$|\\1|p\'"', 15, ip_callback)
+ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'loopback\' -v | awk -F\' \' \'{print $NF}\'"', 15, ipv6_callback)
 -- IPv4 if available
-ipv4 = awful.widget.watch('bash -c "ip -4 addr show dev enp11s0 | sed -n \'s|^.*inet \\([^ ]*/24\\).*$|\\1|p\'"', 15, ip_callback)
+ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'loopback\' -v | awk -F\' \' \'{print $NF}\'"', 15, ipv4_callback)
 
 -- Disk space remaining in GiB
-diskspace = awful.widget.watch('bash -c "df -h /dev/sda2 | grep sda2 | awk \'{print $4}\'"', 60, color_callback)
+diskspace = awful.widget.watch('bash -c "df -h /dev/sdb2 | grep sdb2 | awk \'{print $4}\'"', 60, color_callback)
 
 -- CPU load
 high_cpu_load_threshold = 5.0
-cpu_load = awful.widget.watch('bash -c "uptime | awk \'{print $8}\' | cut -d "," -f 1"', 5, function(widget, stdout)
+cpu_load = awful.widget.watch('bash -c "uptime | cut -d \",\" -f 3 | cut -d \":\" -f 2 | xargs"', 5, function(widget, stdout)
     if tonumber(stdout) > high_cpu_load_threshold then
         widget:set_markup("<span foreground='#FF0000'>" .. stdout .. "</span>")
     else

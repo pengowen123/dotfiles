@@ -37,8 +37,6 @@ font:
     x: 0
     y: 0
 
-  use_thin_strokes: false
-
 # #Colors (custom)
 # colors:
 #   # Default colors
@@ -95,9 +93,9 @@ colors:
       foreground: '#000000'
       background: '#ffffff'
 
-    bar:
-      background: '#c5c8c6'
-      foreground: '#1d1f21'
+  footer_bar:
+    background: '#c5c8c6'
+    foreground: '#1d1f21'
 
   # Normal colors
   normal:
