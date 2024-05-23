@@ -145,9 +145,9 @@ ipv4_callback = function(widget, stdout)
     if stdout == "" then
         ip_format_callback(widget, stdout)
     else
-        local command = 'bash -c "ip -4 addr show dev ' .. stdout .. ' | sed -n \'s|^.*inet \\([^ ]*/24\\).*$|\\1|p\'"'
+        local command = 'bash -c "ip -4 addr show dev ' .. stdout .. ' | grep inet | sed -n \'s|^.*inet \\([^ ]*/[0-9]\\+\\).*$|\\1|p\'"'
         awful.spawn.easy_async(command, function(stdout_ip, e)
-            ip_format_callback(widget, stdout_ip)
+            ip_format_callback(widget, stdout_ip);
         end)
     end
 end
@@ -155,9 +155,9 @@ end
 active_network = 'enp10s0'
 
 -- IPv6 if available
-ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'loopback\' -v | awk -F\' \' \'{print $NF}\'"', 15, ipv6_callback)
+ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv6_callback)
 -- IPv4 if available
-ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'loopback\' -v | awk -F\' \' \'{print $NF}\'"', 15, ipv4_callback)
+ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv4_callback)
 
 -- Disk space remaining in GiB
 diskspace = awful.widget.watch('bash -c "df -h /dev/sdb2 | grep sdb2 | awk \'{print $4}\'"', 60, color_callback)
@@ -285,7 +285,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     local l = awful.layout.suit
     local names = {
-        "main",
+        "1",
         "2",
         "chat",
         "games",
@@ -293,7 +293,7 @@ awful.screen.connect_for_each_screen(function(s)
         "6",
         "7",
         "8",
-        "9",
+        "email",
         "browser",
     }
     local layouts = {
@@ -530,14 +530,14 @@ clientkeys = gears.table.join(
         {description = "toggle cmus playback", group = "applications"}),
     awful.key({ }, "Print",
         function (c)
-            awful.spawn("flameshot full -c")
-        end,
-        {description = "screenshot", group = "applications" }),
-    awful.key({ "Shift" }, "Print",
-        function (c)
             awful.spawn("flameshot gui")
         end,
-        {description = "screenshot gui", group = "applications" })
+        {description = "screenshot gui", group = "applications" }),
+    awful.key({ "Control" }, "Print",
+        function (c)
+            awful.spawn("flameshot full -c")
+        end,
+        {description = "screenshot", group = "applications" })
 )
 
 -- Bind all key numbers to tags.

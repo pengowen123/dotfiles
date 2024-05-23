@@ -71,5 +71,5 @@ set rnu hidden undofile noshowmode cursorline smarttab ignorecase smartcase
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set inccommand+=nosplit
+set inccommand=nosplit
 set scrolloff=5

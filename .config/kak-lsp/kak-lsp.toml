@@ -366,6 +366,12 @@ roots = ["package.json", "tsconfig.json", ".git", ".hg"]
 command = "typescript-language-server"
 args = ["--stdio"]
 
+[language.typescript] # works for typescript as well
+filetypes = ["typescript"]
+roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+command = "typescript-language-server"
+args = ["--stdio"]
+
 # [language.typescript]
 # filetypes = ["typescript"]
 # roots = ["package.json", "tsconfig.json", ".git", ".hg"]

@@ -9,7 +9,6 @@ guiset_quiet statuspanel left
 " Settings
 set editorcmd alacritty -e kak -e 'execute-keys gjA'
 set theme dark
-set hintchars 4327895610
 set hintfiltermode vimperator-reflow
 set allowautofocus false
 set modeindicatorshowkeys true

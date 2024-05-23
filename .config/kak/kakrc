@@ -9,6 +9,7 @@ plug "https://github.com/danr/kakoune-easymotion"
 plug "https://github.com/h-youhei/kakoune-surround"
 plug "https://github.com/Delapouite/kakoune-buffers"
 plug "https://github.com/kkga/saturn.kak"
+plug "https://github.com/crizan/kak-rainbower"
 
 colorscheme one-darker
 
@@ -21,14 +22,16 @@ hook global WinCreate ^[^*]+$ %{
 # set-option global fzf_implementation 'sk'
 
 hook global WinCreate .* %{
-    auto-pairs-enable
+    enable-auto-pairs
 }
 
+# Enable LSP
 eval %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=rust %{
-    # Enable LSP
+hook global WinSetOption filetype=(rust|typescript|c|cpp|racket) %{
     lsp-enable-window
+}
 
+hook global WinSetOption filetype=rust %{
     # Options
     hook window -group rust-inlay-hints BufWritePost .* rust-analyzer-inlay-hints
     hook -once -always window WinSetOption filetype=.* %{
@@ -42,6 +45,11 @@ set-option global lsp_auto_highlight_references true
 set-option global lsp_hover_max_lines 30
 
 set-option global auto_pairs ( ) { } [ ] '"' '"' ` `
+
+set-option global rainbow_mode 0
+hook global WinCreate .* %{
+    rainbow-enable-window
+}
 
 # Config
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} (%opt{modeline_pos_percent}) {{context_info}} {{mode_info}} - %val{client}@[%val{session}]'
@@ -62,6 +70,11 @@ hook global WinCreate .* %{
    autowrap-enable
 }
 
+hook global WinSetOption filetype=racket %{
+    set window tabstop 2
+    set window indentwidth 2
+}
+
 # Tab/Shift-Tab for completion
 hook global WinCreate .* %{
    hook window InsertCompletionShow .* %{
@@ -79,12 +92,12 @@ hook global WinCreate .* %{
 map global normal <c-n> ': buffer-next<ret>'
 map global normal <c-p> ': buffer-previous<ret>'
 map global normal '#' ': comment-line<ret>'
-map global normal <a-2> ': fzf-mode<ret>'
+map global normal <c-t> ': fzf-mode<ret>f'
 map global goto d '<esc>: lsp-definition<ret>' -docstring 'definition'
 map global user <space> ': wa; echo Written<ret>'
-map global user y '<a-|>xclip -sel clipboard<ret>;: echo Copied<ret>'
+map global user y '<a-|>xclip -sel clipboard<ret> ;: echo Copied<ret>'
 map global user f ': fzf-mode<ret>'
-map global user i ': info-buffers<ret>'
+map global user i ': pick-buffers<ret>'
 map global user d ': db<ret>'
 map global user q ':write-all-quit<ret>'
 map global insert <c-d> '<del>'
@@ -92,6 +105,7 @@ map global insert <c-d> '<del>'
 map global insert <c-w> '<a-;>b<a-;><a-d>'
 map global easymotion b '<esc>: easy-motion-b<ret>'
 map global easymotion <a-b> '<esc>: easy-motion-B<ret>'
+map global normal <a-1> '<a-i>)i<ret><esc>s,<ret>lc<ret><esc>t)a<ret><esc>j;'
 
 declare-user-mode surround
 map global normal <a-3> ': enter-user-mode surround<ret>'
