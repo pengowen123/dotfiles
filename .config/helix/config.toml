@@ -1,0 +1,28 @@
+theme = "molokai"
+
+[editor]
+line-number = "relative"
+auto-format = false
+completion-timeout = 5
+bufferline = "multiple"
+text-width = 100
+
+[editor.soft-wrap]
+enable = true
+
+[editor.smart-tab]
+supersede-menu = true
+
+[editor.statusline]
+right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
+
+[keys.normal]
+A-h = ["collapse_selection", "extend_to_line_start"]
+A-l = ["collapse_selection", "extend_to_line_end"]
+C-n = ":buffer-next"
+C-p = ":buffer-previous"
+
+[keys.normal.space]
+space = ":wa!"
+q = ":wqa!"
+n = ":write-buffer-close!"
