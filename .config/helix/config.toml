@@ -11,7 +11,7 @@ text-width = 100
 enable = true
 
 [editor.smart-tab]
-supersede-menu = true
+enable = false
 
 [editor.statusline]
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
@@ -23,6 +23,17 @@ C-n = ":buffer-next"
 C-p = ":buffer-previous"
 
 [keys.normal.space]
+space = ":wa!"
+q = ":wqa!"
+n = ":write-buffer-close!"
+
+[keys.select]
+A-h = ["collapse_selection", "extend_to_line_start"]
+A-l = ["collapse_selection", "extend_to_line_end"]
+C-n = ":buffer-next"
+C-p = ":buffer-previous"
+
+[keys.select.space]
 space = ":wa!"
 q = ":wqa!"
 n = ":write-buffer-close!"

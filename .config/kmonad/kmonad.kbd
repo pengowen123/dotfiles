@@ -1,6 +1,6 @@
 (defcfg
-  (input low-level-hook)
-  (input send-event-sink)
+  input (low-level-hook)
+  output (send-event-sink)
 
   fallthrough true
   allow-cmd false
