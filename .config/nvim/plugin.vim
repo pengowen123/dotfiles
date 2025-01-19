@@ -36,6 +36,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'branch': 'next',
 	\ 'do': 'bash install.sh'
 	\ }
+Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 " Make deoplete completion selection work
