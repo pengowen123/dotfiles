@@ -68,7 +68,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
+    awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.max,
@@ -116,7 +116,8 @@ end
 mytextclock = awful.widget.watch('bash -c "date +\'%F %T\'"', 1, color_callback)
 
 -- Custom right wibox widgets
-separator = wibox.widget.textbox(" | ")
+separator_text = " | "
+separator = wibox.widget.textbox(separator_text)
 
 ip_format_callback = function(widget, stdout)
     if stdout == "" then
@@ -152,12 +153,10 @@ ipv4_callback = function(widget, stdout)
     end
 end
 
-active_network = 'enp10s0'
-
 -- IPv6 if available
-ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv6_callback)
+ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv6_callback)
 -- IPv4 if available
-ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv4_callback)
+ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv4_callback)
 
 -- Disk space remaining in GiB
 diskspace = awful.widget.watch('bash -c "df -h /dev/sdb2 | grep sdb2 | awk \'{print $4}\'"', 60, color_callback)
@@ -217,7 +216,7 @@ memory = awful.widget.watch('bash -c "grep \\"MemTotal\\|MemFree\\|Buffers\\|Cac
         available_text = "<span foreground='#FFFFFF'>" .. available_text .. "</span>"
     end
 
-    local text = tostring(used_text) .. " | " .. tostring(available_text)
+    local text = tostring(used_text) .. separator_text .. tostring(available_text)
 
     widget:set_markup(text)
 end)
@@ -478,7 +477,17 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "b",
+        function (c)
+            awful.spawn("librewolf")
+        end,
+        {description = "browser", group = "applications" }),
+    awful.key({ modkey, "Shift" }, "w",
+        function (c)
+            awful.spawn("bash -c ~/session.sh")
+        end,
+        {description = "session", group = "applications" })
 )
 
 clientkeys = gears.table.join(
@@ -537,7 +546,21 @@ clientkeys = gears.table.join(
         function (c)
             awful.spawn("flameshot full -c")
         end,
-        {description = "screenshot", group = "applications" })
+        {description = "screenshot", group = "client" }),
+
+    awful.key({ modkey, "Control" }, "e",
+        function (c)
+            awful.spawn("alacritty -e " .. editor .. " ~/.config/alacritty/alacritty.toml")
+        end,
+        {description = "edit config", group = "client"}),
+
+    awful.key({ modkey, "Control" }, "=",
+        function (c)
+            awful.spawn("alacritty -e " .. editor .. " ~/.config/awesome/rc.lua")
+        end,
+        {description = "edit config", group = "client"}),
+    awful.key({ modkey, "Control" }, "-", awesome.restart,
+        {description = "reload config", group = "applications"})
 )
 
 -- Bind all key numbers to tags.
