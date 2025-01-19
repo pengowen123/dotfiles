@@ -37,4 +37,4 @@ language-servers = [ "cmake-language-server", "scls" ]
 
 [[language]]
 name = "rust"
-language-servers = [ "rust-analyze", "scls" ]
+language-servers = [ "rust-analyzer", "scls" ]
