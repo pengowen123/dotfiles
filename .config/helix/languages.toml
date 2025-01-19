@@ -6,3 +6,35 @@ name = "racket"
 '{' = '}'
 '[' = ']'
 '"' = '"'
+
+[language-server.clangd]
+args = ["--header-insertion=never"]
+
+[language-server.scls]
+command = "simple-completion-language-server"
+
+[language-server.scls.config]
+max_completion_items = 20
+snippets_first = true
+snippets_inline_by_word_tail = false
+feature_words = true
+feature_snippets = true
+feature_unicode_input = true
+feature_paths = true
+feature_citations = false
+
+[[language]]
+name = "c"
+language-servers = [ "clangd", "scls" ]
+
+[[language]]
+name = "cpp"
+language-servers = [ "clangd", "scls" ]
+
+[[language]]
+name = "cmake"
+language-servers = [ "cmake-language-server", "scls" ]
+
+[[language]]
+name = "rust"
+language-servers = [ "rust-analyze", "scls" ]

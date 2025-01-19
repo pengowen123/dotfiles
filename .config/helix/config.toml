@@ -1,4 +1,4 @@
-theme = "molokai"
+theme = "ayu_evolve"
 
 [editor]
 line-number = "relative"
@@ -17,10 +17,22 @@ enable = false
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
 
 [keys.normal]
+C-A-9 = ":config-reload"
+C-A-0 = ":config-open"
+C-A-w = "move_next_sub_word_start"
+C-A-e = "move_next_sub_word_end"
+C-A-b = "move_prev_sub_word_start"
 A-h = ["collapse_selection", "extend_to_line_start"]
 A-l = ["collapse_selection", "extend_to_line_end"]
 C-n = ":buffer-next"
 C-p = ":buffer-previous"
+"C-." = ":toggle-option file-picker.git-ignore"
+s = "find_next_char"
+S = "find_prev_char"
+f = "select_regex"
+F = "split_selection"
+"*" = "search_selection"
+"A-*" = "search_selection_detect_word_boundaries"
 
 [keys.normal.space]
 space = ":wa!"
@@ -28,10 +40,20 @@ q = ":wqa!"
 n = ":write-buffer-close!"
 
 [keys.select]
+C-A-9 = ":config-reload"
+C-A-0 = ":config-open"
+C-A-w = "extend_next_sub_word_start"
+C-A-e = "extend_next_sub_word_end"
+C-A-b = "extend_prev_sub_word_start"
 A-h = ["collapse_selection", "extend_to_line_start"]
 A-l = ["collapse_selection", "extend_to_line_end"]
 C-n = ":buffer-next"
 C-p = ":buffer-previous"
+"C-." = ":toggle-option file-picker.git-ignore"
+s = "find_next_char"
+S = "find_prev_char"
+f = "select_regex"
+F = "split_selection"
 
 [keys.select.space]
 space = ":wa!"
