@@ -6,17 +6,42 @@ fenv source $GUIX_PROFILE/etc/profile
 # Run system profile scripts
 if status is-login
     fenv source /etc/profile
-    return
 end
 
 # Add function paths
-set -a fish_function_path ~/.config/fish/functions/user/
+set -a fish_function_path $XDG_CONFIG_HOME/fish/functions/user/
 
-if status is-interactive
-    # Do not display the startup greeting
-    set fish_greeting
-else
-    # Minimize load times in non-interactive shells
+# Do not display the startup greeting
+set fish_greeting
+
+# Set environment variables
+set -gx EDITOR helix
+set -gx RUST_SRC_PATH ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
+set -gx ANDROID_HOME ~/Android/Sdk
+set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk/
+
+# Add paths
+fish_add_path ~/bin/ \
+    $XDG_DATA_HOME/bin/ \
+    ~/.cargo/bin/ \
+    ~/.ghcup/bin/ \
+    ~/.gem/ruby/2.7.0/ \
+    /usr/lib/jvm/java-17-openjdk/bin/ \
+    /opt/clang-format-static/ \
+    $ANDROID_HOME/emulator/ \
+    $ANDROID_HOME/platform-tools/
+
+# Start X on first login
+if status is-login;
+    and status is-interactive;
+    and test -z "$DISPLAY";
+    and test -n "$XDG_VTNR";
+    and test "$XDG_VTNR" = 1;
+    exec startx -- -keeptty
+end
+
+# Minimize load times in non-interactive shells
+if not status is-interactive
     return
 end
 
@@ -35,22 +60,6 @@ function fish_custom_key_bindings
     bind --user \e\cb backward-bigword
 end
 set -g fish_key_bindings fish_custom_key_bindings
-
-# Set environment variables
-set -gx EDITOR helix
-set -gx RUST_SRC_PATH ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
-set -gx ANDROID_HOME ~/Android/Sdk
-set -gx JAVA_HOME /usr/lib/jvm/java-17-openjdk/
-
-fish_add_path ~/bin/ \
-    ~/.local/bin/ \
-    ~/.cargo/bin/ \
-    ~/.ghcup/bin/ \
-    ~/.gem/ruby/2.7.0/ \
-    /usr/lib/jvm/java-17-openjdk/bin/ \
-    /opt/clang-format-static/ \
-    $ANDROID_HOME/emulator/ \
-    $ANDROID_HOME/platform-tools/
 
 # Set aliases/abbreviations
 abbr -a shc $EDITOR ~/.config/fish/config.fish

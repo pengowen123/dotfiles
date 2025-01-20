@@ -48,7 +48,7 @@ function colors_ayu_dark --description "Apply the Ayu dark colorscheme"
     # Selected text in vi visual mode
     set -U fish_color_selection --background=$WHITE $BLACK
     # Parameter expansion operators like * and ~
-    set -U fish_color_operator $RED
+    set -U fish_color_operator $MAGENTA
     # Character escapes like \n and \x70
     set -U fish_color_escape $YELLOW
     # Autosuggestions (the proposed rest of a command)

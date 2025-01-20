@@ -62,13 +62,13 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.fair,
     awful.layout.suit.floating,
     awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.max,
@@ -550,13 +550,13 @@ clientkeys = gears.table.join(
 
     awful.key({ modkey, "Control" }, "e",
         function (c)
-            awful.spawn("alacritty -e " .. editor .. " ~/.config/alacritty/alacritty.toml")
+            awful.spawn(terminal .. " -e " .. editor .. " " .. os.getenv("XDG_CONFIG_HOME") .. "/alacritty/alacritty.toml")
         end,
         {description = "edit config", group = "client"}),
 
     awful.key({ modkey, "Control" }, "=",
         function (c)
-            awful.spawn("alacritty -e " .. editor .. " ~/.config/awesome/rc.lua")
+            awful.spawn(terminal .. " -e " .. editor .. " " .. os.getenv("XDG_CONFIG_HOME") .. "$XDG_CONFIG_HOME/awesome/rc.lua")
         end,
         {description = "edit config", group = "client"}),
     awful.key({ modkey, "Control" }, "-", awesome.restart,
