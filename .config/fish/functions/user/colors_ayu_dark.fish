@@ -187,9 +187,9 @@ function colors_ayu_dark_tide
     # set -U tide_pulumi_color normal
 
     set -U tide_pwd_bg_color normal
-    set -U tide_pwd_color_anchors $ORANGE
-    set -U tide_pwd_color_dirs $BLUE
-    set -U tide_pwd_color_truncated_dirs $BRIGHT_BLUE
+    set -U tide_pwd_color_anchors $BRIGHT_WHITE
+    set -U tide_pwd_color_dirs $WHITE
+    set -U tide_pwd_color_truncated_dirs $BRIGHT_BLACK
 
     # set -U tide_python_bg_color normal
     # set -U tide_python_color normal

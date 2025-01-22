@@ -487,7 +487,19 @@ globalkeys = gears.table.join(
         function (c)
             awful.spawn("bash -c ~/session.sh")
         end,
-        {description = "session", group = "applications" })
+        {description = "session", group = "applications" }),
+    awful.key({ modkey, "Control" }, "e",
+        function (c)
+            awful.spawn(editor_cmd .. " " .. os.getenv("XDG_CONFIG_HOME") .. "/alacritty/alacritty.toml")
+        end,
+        {description = "edit config", group = "client"}),
+    awful.key({ modkey, "Control" }, "=",
+        function (c)
+            awful.spawn(editor_cmd .. " " .. os.getenv("XDG_CONFIG_HOME") .. "/awesome/rc.lua")
+        end,
+        {description = "edit config", group = "client"}),
+    awful.key({ modkey, "Control" }, "-", awesome.restart,
+        {description = "reload config", group = "applications"})
 )
 
 clientkeys = gears.table.join(
@@ -546,21 +558,7 @@ clientkeys = gears.table.join(
         function (c)
             awful.spawn("flameshot full -c")
         end,
-        {description = "screenshot", group = "client" }),
-
-    awful.key({ modkey, "Control" }, "e",
-        function (c)
-            awful.spawn(terminal .. " -e " .. editor .. " " .. os.getenv("XDG_CONFIG_HOME") .. "/alacritty/alacritty.toml")
-        end,
-        {description = "edit config", group = "client"}),
-
-    awful.key({ modkey, "Control" }, "=",
-        function (c)
-            awful.spawn(terminal .. " -e " .. editor .. " " .. os.getenv("XDG_CONFIG_HOME") .. "$XDG_CONFIG_HOME/awesome/rc.lua")
-        end,
-        {description = "edit config", group = "client"}),
-    awful.key({ modkey, "Control" }, "-", awesome.restart,
-        {description = "reload config", group = "applications"})
+        {description = "screenshot", group = "client" })
 )
 
 -- Bind all key numbers to tags.
