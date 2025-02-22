@@ -33,11 +33,18 @@ f = "select_regex"
 F = "split_selection"
 "*" = "search_selection"
 "A-*" = "search_selection_detect_word_boundaries"
+C-A-n = "@<space>'<C-n><ret>"
+C-A-p = "@<space>'<C-p><ret>"
 
 [keys.normal.space]
+
 space = ":wa!"
+
 q = ":wqa!"
-n = ":write-buffer-close!"
+A-q = ":qa!"
+n = ":buffer-close"
+N = ":write-buffer-close!"
+A-n = ":buffer-close!"
 
 [keys.select]
 C-A-9 = ":config-reload"
@@ -54,8 +61,16 @@ s = "find_next_char"
 S = "find_prev_char"
 f = "select_regex"
 F = "split_selection"
+"*" = "search_selection"
+"A-*" = "search_selection_detect_word_boundaries"
+C-A-n = "@<space>'<C-n><ret>"
+C-A-p = "@<space>'<C-p><ret>"
 
 [keys.select.space]
 space = ":wa!"
 q = ":wqa!"
 n = ":write-buffer-close!"
+
+[keys.insert]
+C-ret = ["add_newline_below", "move_visual_line_down", "insert_at_line_end"]
+C-d = "delete_char_forward"

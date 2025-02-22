@@ -37,6 +37,10 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'do': 'bash install.sh'
 	\ }
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'https://codeberg.org/growler/k', {
+			\ 'rtp': 'vim-k'
+			\ }
+
 call plug#end()
 
 " Make deoplete completion selection work

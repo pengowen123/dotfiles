@@ -9,7 +9,8 @@ plug "https://github.com/danr/kakoune-easymotion"
 plug "https://github.com/h-youhei/kakoune-surround"
 plug "https://github.com/Delapouite/kakoune-buffers"
 plug "https://github.com/kkga/saturn.kak"
-plug "https://github.com/crizan/kak-rainbower"
+# plug "https://github.com/crizan/kak-rainbower"
+plug "https://github.com/razetime/k-akoune"
 
 colorscheme one-darker
 
@@ -46,10 +47,10 @@ set-option global lsp_hover_max_lines 30
 
 set-option global auto_pairs ( ) { } [ ] '"' '"' ` `
 
-set-option global rainbow_mode 0
-hook global WinCreate .* %{
-    rainbow-enable-window
-}
+# set-option global rainbow_mode 0
+# hook global WinCreate .* %{
+#     rainbow-enable-window
+# }
 
 # Config
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} (%opt{modeline_pos_percent}) {{context_info}} {{mode_info}} - %val{client}@[%val{session}]'
