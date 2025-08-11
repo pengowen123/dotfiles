@@ -4,7 +4,7 @@ function fsize --description "Gets the size of a file or directory"
 
     if test -d $argv[1]
         # Use du for directories
-        du -sh $argv[1]
+        du -sh --block-size 1 $argv[1]
     else
         # Use stat for files
         stat -c '%s' $argv[1]

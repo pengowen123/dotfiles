@@ -56,6 +56,7 @@ end
 function fish_custom_key_bindings
     fish_hybrid_key_bindings
 
+    # Movement
     bind --user -M insert \e\cf forward-bigword
     bind --user \e\cf forward-bigword
     bind --user -M insert \e\cb backward-bigword
@@ -63,10 +64,16 @@ function fish_custom_key_bindings
     bind --user -M insert \cw backward-kill-bigword
     bind --user -M insert \e\cd kill-bigword
 
+    bind --user \el list_current_token
+    bind --user -M insert \el list_current_token
+
     # fzf.fish binds
     bind --user -M insert \ct _fzf_search_directory
+    bind --user -M insert \et _fzf_search_directory
     bind --user -M insert \e\cr _fzf_search_history
     bind --user \e\cr _fzf_search_history
+    bind --user -M insert \e\x20 _fzf_search_history
+    bind --user \e\x20 _fzf_search_history
 end
 set -g fish_key_bindings fish_custom_key_bindings
 
@@ -74,6 +81,7 @@ set -g fish_key_bindings fish_custom_key_bindings
 abbr -a shc $EDITOR ~/.config/fish/config.fish
 function l; eza --long --group --header --color-scale all $argv; end
 function bh; bat -pl help; end
+abbr -a j just
 # Editors
 abbr -a nv nvim
 abbr -a h helix
@@ -83,6 +91,8 @@ abbr -a gs git status
 abbr -a gl git log
 abbr -a gc git checkout
 abbr -a gdh git diff HEAD
+abbr -a gdhc git diff HEAD --cached
+abbr -a gsu git submodule update
 
 # Zoxide
 zoxide init fish --cmd f | source
