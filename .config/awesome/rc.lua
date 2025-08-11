@@ -154,16 +154,16 @@ ipv4_callback = function(widget, stdout)
 end
 
 -- IPv6 if available
-ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv6_callback)
+ipv6 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|vnet0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv6_callback)
 -- IPv4 if available
-ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv4_callback)
+ipv4 = awful.widget.watch('bash -c "nmcli c show --active | tail +2 | rg \'(virbr0|vnet0|loopback|docker)\' -v | awk -F\' \' \'{print $NF}\' | tail -1"', 15, ipv4_callback)
 
 -- Disk space remaining in GiB
 diskspace = awful.widget.watch('bash -c "df -h /dev/sdb2 | grep sdb2 | awk \'{print $4}\'"', 60, color_callback)
 
 -- CPU load
 high_cpu_load_threshold = 5.0
-cpu_load = awful.widget.watch('bash -c "uptime | cut -d \",\" -f 3 | cut -d \":\" -f 2 | xargs"', 5, function(widget, stdout)
+cpu_load = awful.widget.watch('bash -c "uptime | sed \'s/.*load average:\\(.*\\)/\\1/\' | sed \'s/^ *//g\' | cut -d\',\' -f1"', 5, function(widget, stdout)
     if tonumber(stdout) > high_cpu_load_threshold then
         widget:set_markup("<span foreground='#FF0000'>" .. stdout .. "</span>")
     else
