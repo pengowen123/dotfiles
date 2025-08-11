@@ -7,6 +7,10 @@ sin:`sin
 cos:`sin PI+
 tan:{(%sin x)/cos x}
 
+lwr:{{$[(x>64)*x<91;`c$x+32;x]}'x}
+
 rot:{y[(#y)!-x-!#y]}
 mul:(+/*)\:
-hex:,/"0123456789abcdef"@(-2#0,)'+16\
+i2x:,/"0123456789abcdef"@(-2#0,)'+16\
+x2i:{p:((2!#x)#"0"),x;16/'"0123456789abcdef"?(2*!`i$(#p)%2)_lwr@p}
+x2c:{`c$'x2i x}
