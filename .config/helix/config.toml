@@ -35,6 +35,9 @@ F = "split_selection"
 "A-*" = "search_selection_detect_word_boundaries"
 C-A-n = "@<space>'<C-n><ret>"
 C-A-p = "@<space>'<C-p><ret>"
+x = "select_line_below"
+X = "select_line_above"
+C-A-x = "extend_to_line_bounds"
 
 [keys.normal.space]
 
